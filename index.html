@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom right, #ff4e50, #fc913a);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .tap {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 15px;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.5; }
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background: white;
+      position: relative;
+      margin: auto;
+      border-radius: 5px;
+    }
+
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 60px solid #ff4e50;
+      position: absolute;
+      top: -60px;
+      left: 0;
+      transform-origin: bottom;
+      transition: transform 1s;
+    }
+
+    .card {
+      width: 260px;
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.8s;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" onclick="openEnvelope()">
+  <div class="tap">Tap to Open 💌</div>
+  <div class="envelope">
+    <div class="flap"></div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Photo">
+    <div class="message" id="text"></div>
+  </div>
+</div>
+
+<script>
+let opened = false;
+let text = "Happy Valentine 💛 All great wishes from your friend to achieve all your dreams in your life.";
+
+function openEnvelope() {
+  if (opened) return;
+  opened = true;
+
+  document.querySelector(".flap").style.transform = "rotateX(180deg)";
+  document.querySelector(".card").style.transform = "translate(-50%, -50%) scale(1)";
+
+  typeEffect();
+}
+
+function typeEffect() {
+  let i = 0;
+  let element = document.getElementById("text");
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 40);
+    }
+  }
+
+  typing();
+}
+</script>
+
+</body>
+</html>
